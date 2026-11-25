@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 620" font-family="Sarabun, 'Leelawadee UI', Tahoma, sans-serif" font-size="14" fill="#1f2937">
+  <title>US-001 login wireframe</title>
+  <rect width="1000" height="620" fill="#f3f4f6"/>
+
+  <text x="24" y="32" font-size="16" font-weight="bold">Desktop (Thai)</text>
+  <g transform="translate(24 46)">
+    <rect width="470" height="400" rx="8" fill="#fff" stroke="#9ca3af"/>
+    <g font-size="13"><rect x="362" y="14" width="92" height="30" rx="15" fill="#fff" stroke="#6b7280"/><rect x="362" y="14" width="46" height="30" rx="15" fill="#1d4ed8"/><text x="385" y="34" text-anchor="middle" fill="#fff">ไทย</text><text x="431" y="34" text-anchor="middle">EN</text></g>
+    <text x="235" y="84" text-anchor="middle" font-size="22" font-weight="bold">ร้านตัวอย่าง</text>
+    <text x="85" y="122">ชื่อผู้ใช้</text>
+    <rect x="85" y="130" width="300" height="44" rx="6" fill="#fff" stroke="#1d4ed8" stroke-width="2"/><text x="97" y="157" font-size="16">som|</text>
+    <text x="85" y="202">รหัสผ่าน</text>
+    <rect x="85" y="210" width="300" height="44" rx="6" fill="#fff" stroke="#6b7280"/><text x="97" y="238" font-size="18">••••••••</text>
+    <line x1="341" y1="210" x2="341" y2="254" stroke="#d1d5db"/><text x="363" y="237" text-anchor="middle" font-size="13" fill="#1d4ed8">แสดง</text>
+    <text x="85" y="274" font-size="12" fill="#92400e">เปิด Caps Lock อยู่</text>
+    <rect x="85" y="296" width="300" height="48" rx="6" fill="#1d4ed8"/><text x="235" y="326" text-anchor="middle" font-size="16" font-weight="bold" fill="#fff">เข้าสู่ระบบ</text>
+    <text x="235" y="378" text-anchor="middle" font-size="12" fill="#4b5563">Enter ในช่องใดก็ได้ = กดปุ่ม</text>
+  </g>
+
+  <text x="530" y="32" font-size="16" font-weight="bold">Phone (English, after a failure)</text>
+  <g transform="translate(530 46)">
+    <rect width="230" height="400" rx="18" fill="#fff" stroke="#9ca3af"/>
+    <g font-size="12"><rect x="128" y="14" width="86" height="28" rx="14" fill="#fff" stroke="#6b7280"/><rect x="171" y="14" width="43" height="28" rx="14" fill="#1d4ed8"/><text x="150" y="33" text-anchor="middle">ไทย</text><text x="192" y="33" text-anchor="middle" fill="#fff">EN</text></g>
+    <text x="115" y="72" text-anchor="middle" font-size="18" font-weight="bold">Example Shop</text>
+    <text x="16" y="104">Username</text>
+    <rect x="16" y="110" width="198" height="44" rx="6" fill="#fff" stroke="#6b7280"/><text x="28" y="138" font-size="16">som</text>
+    <text x="16" y="178">Password</text>
+    <rect x="16" y="184" width="198" height="44" rx="6" fill="#fff" stroke="#1d4ed8" stroke-width="2"/><text x="28" y="212" font-size="16">|</text><text x="192" y="211" text-anchor="middle" font-size="12" fill="#1d4ed8">Show</text>
+    <rect x="16" y="246" width="198" height="62" rx="6" fill="#fef2f2" stroke="#b91c1c"/>
+    <text x="26" y="266" font-size="12" font-weight="bold" fill="#991b1b">! Wrong username or</text><text x="34" y="281" font-size="12" font-weight="bold" fill="#991b1b">password</text>
+    <text x="26" y="299" font-size="10" fill="#4b5563">trace 4bf92f3577b34da6…</text>
+    <rect x="16" y="322" width="198" height="48" rx="6" fill="#1d4ed8"/><text x="115" y="352" text-anchor="middle" font-size="16" font-weight="bold" fill="#fff">Sign in</text>
+  </g>
+
+  <text x="790" y="32" font-size="16" font-weight="bold">Button states</text>
+  <g transform="translate(790 46)" font-size="13">
+    <text y="16">Idle</text><rect y="24" width="186" height="44" rx="6" fill="#1d4ed8"/><text x="93" y="51" text-anchor="middle" fill="#fff" font-weight="bold">Sign in</text>
+    <text y="96">Sending: locked, one request</text><rect y="104" width="186" height="44" rx="6" fill="#e5e7eb" stroke="#6b7280"/><circle cx="40" cy="126" r="8" fill="none" stroke="#6b7280" stroke-width="3" stroke-dasharray="36 14"/><text x="104" y="131" text-anchor="middle" fill="#374151">Signing in…</text>
+    <text y="176">Failed: enabled again</text><rect y="184" width="186" height="44" rx="6" fill="#1d4ed8"/><text x="93" y="211" text-anchor="middle" fill="#fff" font-weight="bold">Sign in</text>
+    <text y="256">Locked</text><rect y="264" width="186" height="44" rx="6" fill="#e5e7eb" stroke="#6b7280"/><text x="93" y="291" text-anchor="middle" fill="#374151">Try again in 14:59</text>
+  </g>
+
+  <text x="24" y="484" font-size="16" font-weight="bold">Double click: one API call</text>
+  <g transform="translate(24 496)" font-size="13">
+    <rect width="150" height="50" rx="6" fill="#fff" stroke="#6b7280"/><text x="75" y="30" text-anchor="middle">Click 1</text>
+    <path d="M150 25h40" stroke="#374151" stroke-width="2"/><path d="M190 25l-8-5v10z" fill="#374151"/>
+    <rect x="190" width="190" height="50" rx="6" fill="#dcfce7" stroke="#15803d"/><text x="285" y="30" text-anchor="middle">Lock free: set the lock</text>
+    <path d="M380 25h40" stroke="#374151" stroke-width="2"/><path d="M420 25l-8-5v10z" fill="#374151"/>
+    <rect x="420" width="220" height="50" rx="6" fill="#dbeafe" stroke="#1d4ed8"/><text x="530" y="30" text-anchor="middle">POST /api/auth/login (once)</text>
+    <path d="M640 25h40" stroke="#374151" stroke-width="2"/><path d="M680 25l-8-5v10z" fill="#374151"/>
+    <rect x="680" width="270" height="50" rx="6" fill="#fff" stroke="#6b7280"/><text x="815" y="30" text-anchor="middle">Answer or 10 s: release the lock</text>
+    <rect y="62" width="150" height="50" rx="6" fill="#fff" stroke="#6b7280"/><text x="75" y="92" text-anchor="middle">Click 2 or Enter</text>
+    <path d="M150 87h40" stroke="#374151" stroke-width="2"/><path d="M190 87l-8-5v10z" fill="#374151"/>
+    <rect x="190" y="62" width="190" height="50" rx="6" fill="#fef2f2" stroke="#b91c1c"/><text x="285" y="92" text-anchor="middle">Lock set: do nothing</text>
+  </g>
+</svg>

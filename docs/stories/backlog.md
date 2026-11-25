@@ -1,6 +1,6 @@
 # Phase 1 backlog
 
-Each row becomes one issue and one pull request, in this order. A row starts when the owner merges the rows it needs.
+Each row becomes one issue and one pull request, in this order. Each row gets a full story like [US-001](US-001.md) before its code starts. A row starts when the owner merges the rows it needs.
 
 Roles: **E** employee, **M** manager, **A** admin. A higher role can do everything a lower role can.
 
@@ -23,7 +23,7 @@ Roles: **E** employee, **M** manager, **A** admin. A higher role can do everythi
 
 | ID | Story | Role | Needs | Done when |
 | --- | --- | --- | --- | --- |
-| US-001 | Sign in and sign out | E | T-10 | Five wrong passwords lock the account for 15 minutes. Passwords use Argon2id |
+| [US-001](US-001.md) | Sign in and sign out | E | T-10 | Five wrong passwords lock the account for 15 minutes. Passwords use Argon2id |
 | US-002 | Manage users and roles | A | US-001 | A removed user loses access on the next request |
 | US-003 | Switch between Thai and English | E | T-10 | The choice survives a reload |
 | US-004 | Shop settings, VAT, service charge, PromptPay ID | A | US-001 | A PromptPay ID with a wrong check digit is refused |
