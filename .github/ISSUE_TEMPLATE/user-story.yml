@@ -1,0 +1,79 @@
+name: User story
+description: One story with full detail. One pull request closes it. See docs/stories/US-001.md for an example.
+title: "US-000: "
+body:
+  - type: textarea
+    id: story
+    attributes:
+      label: Story
+      placeholder: As a (role), I want (what), so that (why).
+    validations:
+      required: true
+  - type: textarea
+    id: screen
+    attributes:
+      label: Screen and parts
+      description: Wireframe, then each box, button and text in Thai and English with its rules. Write "no screen" for backend work.
+      value: |
+        | Part | Thai | English | Rules |
+        | --- | --- | --- | --- |
+        |  |  |  |  |
+    validations:
+      required: true
+  - type: textarea
+    id: states
+    attributes:
+      label: States
+      description: Idle, sending, empty, failed, locked, offline. What is enabled, and where is the focus?
+    validations:
+      required: true
+  - type: textarea
+    id: once
+    attributes:
+      label: One press, one API call
+      description: What happens on a double click, Enter with a click, a slow network, and a lost reply?
+    validations:
+      required: true
+  - type: textarea
+    id: api
+    attributes:
+      label: API
+      description: Method, path, request, every answer and its error code.
+    validations:
+      required: true
+  - type: textarea
+    id: errors
+    attributes:
+      label: Error texts
+      description: Thai and English for each error.
+    validations:
+      required: true
+  - type: textarea
+    id: security
+    attributes:
+      label: Roles, security and audit
+      description: Which permission, what can be abused, what is written to the audit log.
+    validations:
+      required: true
+  - type: textarea
+    id: checks
+    attributes:
+      label: Done when
+      description: Facts a tester answers with yes or no, each with its test.
+      placeholder: "- [ ] A double click sends one request (Vitest, Playwright)"
+    validations:
+      required: true
+  - type: textarea
+    id: out
+    attributes:
+      label: Not in this story
+  - type: input
+    id: needs
+    attributes:
+      label: Needs
+      placeholder: "#12, #15"
+  - type: input
+    id: replaces
+    attributes:
+      label: Changes an earlier story
+      description: The closed issue, and why it changes.
