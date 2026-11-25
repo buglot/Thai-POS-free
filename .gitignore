@@ -1,0 +1,12 @@
+target/
+node_modules/
+dist/
+*.db
+*.db-shm
+*.db-wal
+.env
+test-results/
+playwright-report/
+coverage/
+# personal agent tooling, not part of the product
+.claude/
