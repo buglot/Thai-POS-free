@@ -1,0 +1,39 @@
+name: User story
+description: One story. One pull request will close it.
+title: "US-000: "
+labels: ["story"]
+body:
+  - type: textarea
+    id: story
+    attributes:
+      label: Story
+      placeholder: As a (role), I want (what), so that (why).
+    validations:
+      required: true
+  - type: textarea
+    id: checks
+    attributes:
+      label: Done when
+      description: Facts a tester can check with yes or no.
+      placeholder: "- [ ] A move without a remark is refused"
+    validations:
+      required: true
+  - type: textarea
+    id: ux
+    attributes:
+      label: UX draft
+      description: Mermaid flow, wireframe, or "no screen".
+  - type: textarea
+    id: out
+    attributes:
+      label: Not in this story
+  - type: input
+    id: needs
+    attributes:
+      label: Needs
+      placeholder: "#12, #15"
+  - type: input
+    id: replaces
+    attributes:
+      label: Changes an earlier story
+      description: The closed issue, and why it changes.
