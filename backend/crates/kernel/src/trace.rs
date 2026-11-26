@@ -41,7 +41,7 @@ use tracing::Instrument;
 
 pub const RESPONSE_HEADER: &str = "x-trace-id";
 
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone)]
 pub struct TraceId(String);
 
 impl TraceId {
