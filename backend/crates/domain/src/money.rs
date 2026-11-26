@@ -30,8 +30,6 @@ impl Satang {
     pub const ZERO: Satang = Satang(0);
 
     /// The price of `qty` pieces. Example: `Satang(6050).times(3)` is `Satang(18150)`.
-    ///
-    /// Panics if the result does not fit in `i64`.
     pub fn times(self, qty: u32) -> Satang {
         let total = self.0 * i64::from(qty);
         Satang(total)
@@ -42,10 +40,7 @@ impl Satang {
     ///
     /// Rounding: half a satang or more goes away from zero, less than half goes toward zero.
     /// Examples: 0.5 becomes 1, 0.49 becomes 0, -0.5 becomes -1.
-    ///
-    /// Panics if the result does not fit in `i64`.
     pub fn ratio(self, numerator: u32, denominator: NonZeroU32) -> Satang {
-        // i128, so that the multiplication cannot overflow before we divide.
         let product: i128 = i128::from(self.0) * i128::from(numerator);
         let divisor: i128 = i128::from(denominator.get());
 
@@ -83,7 +78,6 @@ impl fmt::Display for Satang {
     }
 }
 
-/// Panics if the result does not fit in `i64`.
 impl Add for Satang {
     type Output = Satang;
     fn add(self, other: Satang) -> Satang {
@@ -91,7 +85,6 @@ impl Add for Satang {
     }
 }
 
-/// Panics if the result does not fit in `i64`.
 impl Sub for Satang {
     type Output = Satang;
     fn sub(self, other: Satang) -> Satang {
