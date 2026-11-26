@@ -150,10 +150,14 @@ async fn ng_bad_traceparent_gets_a_fresh_id() {
         "00-4BF92F3577B34DA6A3CE929D0E0E4736-00f067aa0ba902b7-01",
         // Trace-id with 31 digits.
         "00-4bf92f3577b34da6a3ce929d0e0e473-00f067aa0ba902b7-01",
+        // Trace-id with 33 digits.
+        "00-4bf92f3577b34da6a3ce929d0e0e47361-00f067aa0ba902b7-01",
         // Trace-id all zero.
         "00-00000000000000000000000000000000-00f067aa0ba902b7-01",
         // Parent-id with 15 digits.
         "00-4bf92f3577b34da6a3ce929d0e0e4736-00f067aa0ba902b-01",
+        // Parent-id with 17 digits.
+        "00-4bf92f3577b34da6a3ce929d0e0e4736-00f067aa0ba902b71-01",
         // Parent-id all zero.
         "00-4bf92f3577b34da6a3ce929d0e0e4736-0000000000000000-01",
         // Flags that are not hex.
