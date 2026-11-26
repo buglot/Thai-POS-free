@@ -52,7 +52,8 @@
 //! A 13-digit national ID or tax ID ends with a check digit.
 //! Multiply the first 12 digits by 13, 12, 11 and so on down to 2, and add the results.
 //! The check digit is (11 - sum mod 11) mod 10.
-//! Example `1101700203450`: 1x13 + 1x12 + 0x11 + 1x10 + 7x9 + 0x8 + 0x7 + 2x6 + 0x5 + 3x4 + 4x3 + 5x2 = 144.
+//! Example `1101700203450`:
+//! 1 x 13 + 1 x 12 + 0 x 11 + 1 x 10 + 7 x 9 + 0 x 8 + 0 x 7 + 2 x 6 + 0 x 5 + 3 x 4 + 4 x 3 + 5 x 2 = 144.
 //! 144 mod 11 = 1, and (11 - 1) mod 10 = 0, which is the last digit.
 
 use std::fmt;
