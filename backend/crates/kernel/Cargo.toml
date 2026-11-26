@@ -1,0 +1,28 @@
+[package]
+name = "pos-kernel"
+version.workspace = true
+edition.workspace = true
+publish.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+# The web framework. `json` writes the error body. `matched-path` names the route in the log.
+axum = { version = "0.8", default-features = false, features = ["json", "matched-path"] }
+# The error body is JSON.
+serde = { version = "1", features = ["derive"] }
+# `task_local!` keeps the trace ID of the request being handled.
+tokio = { version = "1", features = ["rt"] }
+# Log lines, and the request span that adds the trace ID to each of them.
+tracing = { version = "0.1", default-features = false, features = ["std"] }
+# A fresh trace ID is the 32 hex digits of a random UUID.
+uuid = { version = "1", features = ["v4"] }
+
+[dev-dependencies]
+serde_json = "1"
+tokio = { version = "1", features = ["macros", "rt"] }
+# `oneshot` sends one request to a router without a network.
+tower = { version = "0.5", features = ["util"] }
+# Writes the log into a buffer that a test can read.
+tracing-subscriber = { version = "0.3", default-features = false, features = ["fmt"] }
