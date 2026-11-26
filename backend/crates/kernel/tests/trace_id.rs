@@ -11,6 +11,7 @@ use axum::http::{HeaderValue, Request, StatusCode};
 use axum::middleware::from_fn;
 use axum::response::Response;
 use axum::routing::get;
+use pos_kernel::error::{AppError, ErrorCode};
 use pos_kernel::trace;
 use tower::ServiceExt;
 
@@ -45,8 +46,21 @@ async fn hello() -> &'static str {
     "hello"
 }
 
+async fn refuse() -> Result<&'static str, AppError> {
+    Err(AppError::new(ErrorCode::Invalid, "name is empty"))
+}
+
+async fn fail() -> Result<&'static str, AppError> {
+    Err(AppError::new(ErrorCode::Internal, "database refused password hunter2"))
+}
+
 fn app() -> Router {
-    Router::new().route("/hello", get(hello)).route("/t/{token}", get(hello)).layer(from_fn(trace::middleware))
+    Router::new()
+        .route("/hello", get(hello))
+        .route("/t/{token}", get(hello))
+        .route("/refuse", get(refuse))
+        .route("/fail", get(fail))
+        .layer(from_fn(trace::middleware))
 }
 
 /// Sends one GET request and returns the response and every log line it wrote.
@@ -70,20 +84,46 @@ fn header_id(response: &Response) -> String {
     value.to_str().expect("a trace ID is ASCII").to_owned()
 }
 
+async fn body_json(response: Response) -> serde_json::Value {
+    let bytes = axum::body::to_bytes(response.into_body(), usize::MAX).await.expect("the body can be read");
+    serde_json::from_slice(&bytes).expect("an error body is JSON")
+}
+
 /// True for 32 lowercase hex digits that are not all zero. Written from the W3C rule, not from the code.
 fn is_trace_id(text: &str) -> bool {
     let hex = text.len() == 32 && text.bytes().all(|b| b.is_ascii_digit() || (b'a'..=b'f').contains(&b));
     hex && text != "00000000000000000000000000000000"
 }
 
-/// OK: a valid `traceparent` keeps its trace-id, so the browser and the server log show the same ID.
+/// OK: the Done-when of T-07. One request puts one ID in the log, the `x-trace-id` header and the error body.
+#[tokio::test]
+async fn ok_one_id_in_log_header_and_body() {
+    let (response, log) = send("/refuse", None).await;
+
+    assert_eq!(response.status(), StatusCode::UNPROCESSABLE_ENTITY);
+    let id = header_id(&response);
+    assert!(is_trace_id(&id), "{id}");
+
+    let body = body_json(response).await;
+    assert_eq!(body["code"], "invalid");
+    assert_eq!(body["message"], "name is empty");
+    assert_eq!(body["trace_id"], id.as_str());
+
+    assert!(!log.is_empty());
+    for line in log.lines() {
+        assert!(line.contains(&id), "{line}");
+    }
+}
+
+/// OK: a valid `traceparent` keeps its trace-id, so the browser, the log and the error body show the same ID.
 #[tokio::test]
 async fn ok_valid_traceparent_is_reused() {
-    let (response, log) = send("/hello", Some(HeaderValue::from_static(VALID))).await;
+    let (response, log) = send("/refuse", Some(HeaderValue::from_static(VALID))).await;
 
-    assert_eq!(response.status(), StatusCode::OK);
     assert_eq!(header_id(&response), ID);
     assert!(log.contains(ID), "{log}");
+    let body = body_json(response).await;
+    assert_eq!(body["trace_id"], ID);
 }
 
 /// OK: without `traceparent` the server makes a valid ID, and a new one for each request.
@@ -146,4 +186,30 @@ async fn ok_log_shows_the_route_not_the_path() {
     assert_eq!(response.status(), StatusCode::OK);
     assert!(log.contains("/t/{token}"), "{log}");
     assert!(!log.contains("secret-table-link"), "{log}");
+}
+
+/// NG: a handler fails inside. The body says only `internal`. The detail goes to the log with the trace ID.
+#[tokio::test]
+async fn ng_internal_error_keeps_the_detail_out_of_the_body() {
+    let (response, log) = send("/fail", None).await;
+
+    assert_eq!(response.status(), StatusCode::INTERNAL_SERVER_ERROR);
+    let id = header_id(&response);
+    let body = body_json(response).await;
+    assert_eq!(body["code"], "internal");
+    assert_eq!(body["trace_id"], id.as_str());
+    assert!(!body.to_string().contains("hunter2"), "{body}");
+
+    let detail_line = log.lines().find(|line| line.contains("hunter2")).expect("the detail is in the log");
+    assert!(detail_line.contains(&id), "{detail_line}");
+}
+
+/// OK: outside a request `current` still gives a valid ID, and a new one each time.
+#[test]
+fn ok_current_outside_a_request_is_a_fresh_id() {
+    let first = trace::current().to_string();
+    let second = trace::current().to_string();
+
+    assert!(is_trace_id(&first), "{first}");
+    assert_ne!(first, second);
 }
