@@ -2,7 +2,8 @@ use std::fmt;
 use std::iter::Sum;
 use std::ops::{Add, Sub};
 
-/// Thai money in whole satang. 100 satang are 1 baht. Never a float, which cannot hold 0.10 exactly.
+/// Thai money in whole satang (สตางค์). 100 satang are 1 baht (บาท).
+/// Never a float, which cannot hold 0.10 exactly.
 #[derive(Debug, Clone, Copy, Default, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub struct Satang(pub i64);
 
