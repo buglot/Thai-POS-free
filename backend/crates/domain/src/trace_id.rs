@@ -1,8 +1,9 @@
 //! The trace ID of one request.
 //!
 //! Every request has one ID. Support asks for it on the screen and finds the request in the log,
-//! the audit log and the order history. The ID is the trace-id part of a W3C `traceparent` header,
-//! such as `4bf92f3577b34da6a3ce929d0e0e4736`.
+//! the audit log and the order history. The ID is the trace-id part of a W3C `traceparent` header.
+//! In the header `00-4bf92f3577b34da6a3ce929d0e0e4736-00f067aa0ba902b7-01` the trace ID is
+//! `4bf92f3577b34da6a3ce929d0e0e4736`.
 //!
 //! Types in this file:
 //!
@@ -84,6 +85,7 @@ mod tests {
             ("4bf92f3577b34da6a3ce929d0e0e473g", "g is not hex"),
             ("4bf92f3577b34da6 3ce929d0e0e4736", "a space"),
             ("00000000000000000000000000000000", "all zero"),
+            ("4bf92f3577b34da6a3ce929d0e0e4ก", "29 digits and ก, which is 3 bytes, so 32 bytes"),
             ("00-4bf92f3577b34da6a3ce929d0e0e4736-00f067aa0ba902b7-01", "a whole traceparent header"),
         ];
         for (text, reason) in cases {
