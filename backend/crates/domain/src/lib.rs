@@ -3,7 +3,9 @@
 mod money;
 mod order;
 mod role;
+mod trace_id;
 
 pub use money::Satang;
-pub use order::{ItemStatus, RefusedMove};
+pub use order::{AllowedMove, ItemStatus, RefusedMove};
 pub use role::{Permission, Role};
+pub use trace_id::TraceId;
